@@ -1,5 +1,5 @@
 import { Document, Types } from "mongoose";
-import { IAddress } from "./pateint.interface";
+import { IAddress } from "./patient.interface";
 
 
 export enum HospitalType {

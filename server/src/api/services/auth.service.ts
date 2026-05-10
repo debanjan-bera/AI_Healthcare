@@ -1,7 +1,7 @@
 import argon2 from "argon2";
 import { UserRole } from "../../types/user.type";
 import userModel from "../../model/user.model";
-import { PatientModel } from "../../model/Pateint.model";
+import { PatientModel } from "../../model/Patient.model";
 import { PharmacyModel } from "../../model/Pharmacy.model";
 import { HospitalModel } from "../../model/Hospital.model";
 

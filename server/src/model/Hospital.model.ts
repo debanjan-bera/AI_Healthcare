@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
 import { HospitalType, IHospital } from "../types/interface/hospital.interface";
-import { IAddress } from "../types/interface/pateint.interface";
+import { IAddress } from "../types/interface/patient.interface";
 
 const AddressSchema = new Schema<IAddress>(
   {

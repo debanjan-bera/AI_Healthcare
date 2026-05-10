@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
-import { BloodGroup, IAddress, IPatient } from "../types/interface/pateint.interface";
+import { BloodGroup, IAddress, IPatient } from "../types/interface/patient.interface";
 
 const AddressSchema = new Schema<IAddress>(
   {
