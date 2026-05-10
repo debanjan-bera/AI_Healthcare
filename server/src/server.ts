@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import type { Request,Response } from 'express';
+import type { Request, Response } from 'express';
 import authRoutes from './api/routes/auth.routes';
 import { connectDB } from './config/db';
 import cookieParser from 'cookie-parser'
@@ -23,7 +23,6 @@ app.use(
   })
 );
 app.use(cookieParser());
-
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRouter);
 app.use('/api/hospital', hospitalRouter);
@@ -34,6 +33,11 @@ app.use((err: Error, req: Request, res: Response, next: Function) => {
   console.error(err.message);
   res.status(500).json({ error: 'Something went wrong!' });
 })
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
 
 app.listen(process.env.PORT || 8080, () => {
   console.log(`Server is running on port ${process.env.PORT || 8080}`);
