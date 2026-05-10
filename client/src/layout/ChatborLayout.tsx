@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom"
-import { ChevronDown, FileText, HeartPulse, Plus, Search, History as HistoryIcon, ArrowLeft, LogOut } from "lucide-react"
+import { FileText, HeartPulse, Plus, Search, History as HistoryIcon, ArrowLeft, LogOut } from "lucide-react"
 import { useAuth } from "../hooks/AuthHook";
 import { useChat } from "../hooks/ChatHook";
 

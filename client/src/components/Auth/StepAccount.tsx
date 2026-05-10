@@ -1,4 +1,4 @@
-import { Eye, EyeOff, User } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 

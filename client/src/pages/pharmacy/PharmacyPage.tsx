@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, ShoppingCart, Pill, Activity, Shield, ArrowRight, MapPin, Star, Plus, X } from 'lucide-react';
+import { useState } from 'react';
+import { Search, ShoppingCart, Pill, Shield, ArrowRight, Plus, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthHook';
 

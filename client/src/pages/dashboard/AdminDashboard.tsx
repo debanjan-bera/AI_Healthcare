@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useAuth } from '../../hooks/AuthHook';
 import { 
   Users, Activity, Calendar, Pill, ShieldCheck, 
   Search, Bell, Settings, LogOut, ChevronRight,
-  TrendingUp, Clock, AlertTriangle, FileText
+  Clock, AlertTriangle, FileText
 } from 'lucide-react';
 
 const AdminDashboard = () => {
-  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('Overview');
 

@@ -1,9 +1,8 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthHook';
 import { 
-  Search, Bell, User, Calendar, 
-  Pill, Activity, FileText, AlertCircle, Plus, Watch, FolderOpen, ChevronRight, Stethoscope, MessageSquare, Sparkles
+  Search, Bell, Calendar, 
+  Pill, AlertCircle, Watch, FolderOpen, ChevronRight, Stethoscope, MessageSquare, Sparkles
 } from 'lucide-react';
 
 const PatientDashboard = () => {

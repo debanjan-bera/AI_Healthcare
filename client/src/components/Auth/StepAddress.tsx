@@ -57,7 +57,7 @@ const StepAddress: React.FC = () => {
           setIsLoadingLocation(false);
         }
       },
-      (error) => {
+      (_error) => {
         toast.error("Location access denied or failed.");
         setIsLoadingLocation(false);
       }

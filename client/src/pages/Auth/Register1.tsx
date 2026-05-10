@@ -1,19 +1,43 @@
 import React, { useState } from 'react';
-import { HeartPulse, Sparkles, Eye, EyeOff, ArrowRight, ChevronLeft, User, Stethoscope, Building2, Pill, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { HeartPulse, Sparkles, Eye, EyeOff, ArrowRight, ChevronLeft, User, Stethoscope, Building2, Pill, CheckCircle2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import RegisterIllustration from '../../assets/98ee2bdd-7497-4317-9bbb-8784c0a18dd1.png';
 
-export enum BloodGroup {
-    A_POSITIVE = "A+",
-    A_NEGATIVE = "A-",
-    B_POSITIVE = "B+",
-    B_NEGATIVE = "B-",
-    AB_POSITIVE = "AB+",
-    AB_NEGATIVE = "AB-",
-    O_POSITIVE = "O+",
-    O_NEGATIVE = "O-",
+export const BloodGroup = {
+    A_POSITIVE: "A+",
+    A_NEGATIVE: "A-",
+    B_POSITIVE: "B+",
+    B_NEGATIVE: "B-",
+    AB_POSITIVE: "AB+",
+    AB_NEGATIVE: "AB-",
+    O_POSITIVE: "O+",
+    O_NEGATIVE: "O-",
+} as const;
+
+export type BloodGroupType = (typeof BloodGroup)[keyof typeof BloodGroup];
+
+interface RegisterFormFields {
+    fullName: string;
+    mobile: string;
+    password: string;
+    role: string;
+    age: number;
+    gender: string;
+    bloodGroup: string;
+    height: number;
+    weight: number;
+    allergies: string;
+    medicalHistory: string;
+    currentMedicines: string;
+    street: string;
+    city: string;
+    state: string;
+    pincode: string;
+    country: string;
+    insuranceProvider: string;
+    insuranceNumber: string;
 }
 
 const Register1: React.FC = () => {
@@ -23,8 +47,28 @@ const Register1: React.FC = () => {
     const totalSteps = 5;
     const navigate = useNavigate();
 
-    const { register, handleSubmit, formState: { errors, isSubmitting }, trigger, watch, setValue } = useForm({
-        defaultValues: { role: 'Patient' }
+    const { register, handleSubmit, formState: { errors, isSubmitting }, trigger, watch, setValue } = useForm<RegisterFormFields>({
+        defaultValues: {
+            role: 'Patient',
+            fullName: '',
+            mobile: '',
+            password: '',
+            age: 0,
+            gender: '',
+            bloodGroup: '',
+            height: 0,
+            weight: 0,
+            allergies: '',
+            medicalHistory: '',
+            currentMedicines: '',
+            street: '',
+            city: '',
+            state: '',
+            pincode: '',
+            country: '',
+            insuranceProvider: '',
+            insuranceNumber: ''
+        } as RegisterFormFields
     });
 
     const selectedRole = watch('role');
@@ -37,7 +81,7 @@ const Register1: React.FC = () => {
         if (step === 4) fieldsToValidate = ['allergies', 'medicalHistory', 'currentMedicines'];
         if (step === 5) fieldsToValidate = ['street', 'city', 'state', 'pincode'];
 
-        const isStepValid = await trigger(fieldsToValidate);
+        const isStepValid = await trigger(fieldsToValidate as any);
         if (isStepValid) {
             setStep(prev => Math.min(prev + 1, totalSteps + 1));
         }
