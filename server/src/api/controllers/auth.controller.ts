@@ -37,11 +37,11 @@ export const loginController = async (req: Request, res: Response) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false, // true in production (HTTPS)
-            sameSite: "lax",
+            secure: true, // true in production (HTTPS)
+            sameSite: "none",
             maxAge: 24 * 60 * 60 * 1000
         });
-        
+
         return res.json({
             successful: true,
             message: `User with mobile:${mobile} logged in successfully!`,
@@ -156,7 +156,7 @@ export const me = async (req: AuthRequest, res: Response) => {
     }
 }
 
-export const logoutController= (req: Request, res: Response) => {
-  res.clearCookie("token");
-  res.json({ message: "Logged out" });
+export const logoutController = (req: Request, res: Response) => {
+    res.clearCookie("token");
+    res.json({ message: "Logged out" });
 }
