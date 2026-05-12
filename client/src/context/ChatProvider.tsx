@@ -244,8 +244,33 @@ useEffect(() => {
   fetchAllSession();
 }, [user]);
 
+    const createNewSession = () => {
+        navigate('/chat');
+        setMessages([]);
+        setInputValue("");
+    };
+
+    const currentSession = sessions.find(s => s.sessionId === sessionId) || null;
+
     return (
-        <ChatContext.Provider value={{ isMultiline, setIsMultiline, inputValue, setInputValue, messages, setMessages, isTyping, setIsTyping, textareaRef, startConversation, handleSend, handleFileUpload, chatLoading, sessions }}>
+        <ChatContext.Provider value={{ 
+            isMultiline, 
+            setIsMultiline, 
+            inputValue, 
+            setInputValue, 
+            messages, 
+            setMessages, 
+            isTyping, 
+            setIsTyping, 
+            textareaRef, 
+            startConversation, 
+            handleSend, 
+            handleFileUpload, 
+            chatLoading, 
+            sessions,
+            createNewSession,
+            currentSession
+        }}>
             {children}
         </ChatContext.Provider>
     );

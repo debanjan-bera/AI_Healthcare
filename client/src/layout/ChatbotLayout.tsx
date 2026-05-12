@@ -12,7 +12,7 @@ export const ChatbotLayout = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const { user, loading, logout } = useAuth();
-    const { sessions, createNewSession, currentSession } = useChat()
+    const { sessions, createNewSession } = useChat()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);

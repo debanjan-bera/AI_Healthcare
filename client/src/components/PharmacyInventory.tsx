@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
   Pill, Search, Plus, Filter, 
-  AlertTriangle, ArrowUpRight, ArrowDownRight,
-  Edit2, Trash2, MoreVertical
+  AlertTriangle, ArrowUpRight,
+  Edit2, Trash2
 } from 'lucide-react';
 
 const INVENTORY = [

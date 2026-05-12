@@ -16,6 +16,8 @@ type ChatContextType = {
   handleFileUpload: (file: File) => Promise<void>;
   chatLoading : boolean;
   sessions: getSessions[];
+  createNewSession: () => void;
+  currentSession: getSessions | null;
 };
 
 

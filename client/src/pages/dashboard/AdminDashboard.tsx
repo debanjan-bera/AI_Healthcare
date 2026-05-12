@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useAuth } from '../../hooks/AuthHook';
 import { 
   Users, Activity, Calendar, Pill, ShieldCheck, 
-  Search, Bell, Settings, LogOut, ChevronRight,
-  Clock, AlertTriangle, FileText, Sun, Moon
+  Search, Bell, LogOut, ChevronRight,
+  Clock, AlertTriangle
 } from 'lucide-react';
 import ThemeToggle from '../../components/ThemeToggle';
 import AppointmentList from '../../components/AppointmentList';

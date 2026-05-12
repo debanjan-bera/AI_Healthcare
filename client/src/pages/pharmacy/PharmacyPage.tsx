@@ -1,4 +1,5 @@
-import { Search, ShoppingCart, Pill, Shield, ArrowRight, Plus, X, Sun, Moon } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, ShoppingCart, Pill, Shield, ArrowRight, Plus, X } from 'lucide-react';
 import ThemeToggle from '../../components/ThemeToggle';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthHook';
@@ -25,7 +26,7 @@ const PharmacyPage = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleAddToCart = (med: any) => {
-    setCartItems(prev => [...prev, med]);
+    setCartItems((prev: any[]) => [...prev, med]);
   };
 
   return (
@@ -205,7 +206,7 @@ const PharmacyPage = () => {
                   <p>Your cart is empty.</p>
                 </div>
               ) : (
-                cartItems.map((item, index) => (
+                cartItems.map((item: any, index: number) => (
                   <div key={index} className="flex items-center gap-4 bg-gray-50 dark:bg-slate-800/50 p-3 rounded-xl border border-gray-100 dark:border-slate-700">
                     <div className="w-16 h-16 rounded-lg overflow-hidden bg-white dark:bg-slate-800 shrink-0">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
@@ -225,7 +226,7 @@ const PharmacyPage = () => {
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-gray-500 font-medium">Total</span>
                   <span className="text-xl font-bold text-gray-900">
-                    ₹{cartItems.reduce((total, item) => total + parseFloat(item.price.replace('₹', '')), 0).toFixed(2)}
+                    ₹{cartItems.reduce((total: number, item: any) => total + parseFloat(item.price.replace('₹', '')), 0).toFixed(2)}
                   </span>
                 </div>
                 <button 

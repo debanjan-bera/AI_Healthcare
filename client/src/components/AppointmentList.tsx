@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  Users, Clock, Search, Filter, 
-  ChevronRight, CheckCircle2, User, Activity, Calendar
+  Users, Clock, Search, 
+  ChevronRight, CheckCircle2, User, Activity
 } from 'lucide-react';
 import { useAuth } from '../hooks/AuthHook';
 

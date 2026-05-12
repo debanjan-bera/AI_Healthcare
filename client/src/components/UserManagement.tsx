@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
-  Users, Search, Filter, 
-  ChevronRight, MoreVertical, Mail, Phone,
-  UserCheck, UserMinus, Shield, MapPin
+  Users, Search, 
+  Mail, Phone,
+  UserCheck, UserMinus, MapPin
 } from 'lucide-react';
 
 const PATIENTS = [

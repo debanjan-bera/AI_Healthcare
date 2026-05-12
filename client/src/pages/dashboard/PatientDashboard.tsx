@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthHook';
 import {
   Search, Bell, Calendar,
-  Pill, AlertCircle, Watch, FolderOpen, ChevronRight, Stethoscope, MessageSquare, Sparkles,
-  Sun, Moon, Activity, FileText
+  Watch, FolderOpen, ChevronRight, Stethoscope, MessageSquare, Sparkles,
+  Activity, FileText
 } from 'lucide-react';
 import ThemeToggle from '../../components/ThemeToggle';
 
