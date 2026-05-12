@@ -4,14 +4,16 @@ import { ChatContext } from "./ChatContext";
 import { useNavigate, useParams } from "react-router-dom";
 import type { ChatMessages, getSessions } from "../types/Chat.interface";
 import { generateId } from "../utils/genereateId";
+import { useAuth } from "../hooks/AuthHook";
 
 
 export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
+    const {user} = useAuth()
     const [messages, setMessages] = useState<ChatMessages[]>([]);
     const [isMultiline, setIsMultiline] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [isTyping, setIsTyping] = useState(false);
-    const [chatLoading, setChatLoading] = useState(true);
+    const [chatLoading, setChatLoading] = useState(false);
     const [sessions, setSessions] = useState<getSessions[]>([]);
     const navigate = useNavigate();
     const { sessionId } = useParams();
@@ -24,9 +26,14 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     useEffect(() => {
-        if (!sessionId) return;
+        if (!sessionId) {
+            setMessages([]);
+            setChatLoading(false);
+            return;
+        }
 
         let isMounted = true;
+        setChatLoading(true);
 
         const initChat = async () => {
             try {
@@ -112,14 +119,20 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
             const session = await api.chat.createSession(inputValue);
             if (!session.sessionId) return;
             const newSessionId = session.sessionId;
-            console.log(inputValue);
-            await processMessage(newSessionId, inputValue);
+            const messageToSend = inputValue;
+            
+            setInputValue("");
             navigate(`/chat/c/${newSessionId}`);
+            
+            await processMessage(newSessionId, messageToSend);
+            
+            // Refresh sessions list
+            const res = await api.chat.getAllSessions();
+            setSessions(res.sessions || []);
+            
         } catch (err) {
             console.error("Failed to start conversation:", err);
         } finally {
-            setInputValue("");
-
             if (textareaRef.current) {
                 textareaRef.current.style.height = "auto";
                 setIsMultiline(false);
@@ -130,9 +143,10 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     const handleSend = async () => {
         if (!inputValue.trim() || !sessionId) return;
 
-        await processMessage(sessionId, inputValue);
-
+        const messageToSend = inputValue;
         setInputValue("");
+
+        await processMessage(sessionId, messageToSend);
 
         if (textareaRef.current) {
             textareaRef.current.style.height = "auto";
@@ -212,13 +226,23 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
 
-    useEffect(() => {
-        const fetchAllSession = async () => {
-            const res = await api.chat.getAllSessions()
-            setSessions(res.sessions);
-        }
-        fetchAllSession()
-    }, [])
+useEffect(() => {
+  if (!user) return;
+
+  const fetchAllSession = async () => {
+    try {
+      const res = await api.chat.getAllSessions();
+
+      setSessions(res.sessions || []);
+    } catch (error) {
+      console.error("Failed to fetch sessions", error);
+
+      setSessions([]);
+    }
+  };
+
+  fetchAllSession();
+}, [user]);
 
     return (
         <ChatContext.Provider value={{ isMultiline, setIsMultiline, inputValue, setInputValue, messages, setMessages, isTyping, setIsTyping, textareaRef, startConversation, handleSend, handleFileUpload, chatLoading, sessions }}>

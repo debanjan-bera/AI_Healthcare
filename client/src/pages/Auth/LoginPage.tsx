@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { type LoginPayload } from '../../utils/auth/auth.api';
 import { useAuth } from '../../hooks/AuthHook';
+import Loading from '../../components/Loading';
 
 
 const LoginPage: React.FC = () => {
@@ -15,9 +16,14 @@ const LoginPage: React.FC = () => {
   } = useForm<LoginPayload>();
   const navigate = useNavigate()
   const { Login } = useAuth();
+
+  if (isSubmitting) {
+    return <Loading />;
+  }
+
   const onSubmit = async (data: LoginPayload) => {
     await Login(data)
-    navigate("/chat")
+    navigate("/dashboard")
   };
   return (
     <div className="flex min-h-screen w-full font-inter overflow-hidden">
@@ -71,12 +77,23 @@ const LoginPage: React.FC = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#0066FF]/5 blur-[120px] rounded-full -z-10" />
       </div>
 
+      {/* Mobile Brand Header - Visible only on mobile */}
+      <div className="lg:hidden absolute top-0 left-0 right-0 p-6 flex items-center justify-between z-10">
+        <div className="flex items-center gap-2">
+          <div className="bg-[#0066FF] p-1.5 rounded-lg border border-white/10 shadow-lg shadow-blue-500/20">
+            <HeartPulse className="text-white" size={20} />
+          </div>
+          <h2 className="font-bold text-lg tracking-tight text-slate-900">AI healthcare</h2>
+        </div>
+        <Link to="/register" className="text-xs font-bold text-[#0066FF] bg-blue-50 px-3 py-1.5 rounded-lg">Sign Up</Link>
+      </div>
+
       {/* Right Side - Login Form */}
-      <div className="flex-1 flex flex-col justify-center items-center px-6 lg:px-20">
-        <div className="w-full max-w-md">
-          <div className="mb-10">
-            <h1 className="text-4xl font-bold text-[#0a0c10] mb-3">Welcome back 👋</h1>
-            <p className="text-gray-500">Sign in to continue to your healthcare workspace.</p>
+      <div className="flex-1 flex flex-col justify-center items-center px-6 lg:px-20 py-12 lg:py-0 bg-white">
+        <div className="w-full max-w-md mt-12 lg:mt-0">
+          <div className="mb-8 lg:mb-10">
+            <h1 className="text-3xl lg:text-4xl font-bold text-[#0a0c10] mb-3 leading-tight">Welcome back 👋</h1>
+            <p className="text-gray-500 text-sm lg:text-base">Sign in to continue to your healthcare workspace.</p>
           </div>
 
           <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>

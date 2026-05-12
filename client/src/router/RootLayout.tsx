@@ -2,14 +2,17 @@
 import { Outlet } from "react-router-dom";
 import { AuthProvider } from "../context/AuthProvider";
 import { ChatProvider } from "../context/ChatProvider";
+import { ThemeProvider } from "../context/ThemeContext";
 
 const RootLayout = () => {
   return (
-    <AuthProvider>
-      <ChatProvider>
-        <Outlet />
-      </ChatProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <ChatProvider>
+          <Outlet />
+        </ChatProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

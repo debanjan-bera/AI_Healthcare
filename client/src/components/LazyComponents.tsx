@@ -6,4 +6,6 @@ export const HomePage = lazy(() => import("../pages/Home"));
 export const RegisterPage = lazy(() => import("../pages/Auth/Register"));
 export const PatientDashboardPage = lazy(() => import("../pages/dashboard/PatientDashboard"));
 export const AdminDashboardPage = lazy(() => import("../pages/dashboard/AdminDashboard"));
+export const DashboardPage = lazy(() => import("../pages/dashboard/Dashboard"));
 export const PharmacyPage = lazy(() => import("../pages/pharmacy/PharmacyPage"));
+export const AppointmentPage = lazy(() => import("../pages/appointment/AppointmentPage"));
