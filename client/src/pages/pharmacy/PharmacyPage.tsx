@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, ShoppingCart, Pill, Shield, ArrowRight, Plus, X } from 'lucide-react';
 import ThemeToggle from '../../components/ThemeToggle';
 import { useNavigate } from 'react-router-dom';
