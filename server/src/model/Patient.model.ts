@@ -1,29 +1,5 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
-import { BloodGroup, IAddress, IPatient } from "../types/interface/patient.interface";
-
-const AddressSchema = new Schema<IAddress>(
-  {
-    street: { type: String, required: true },
-    city: { type: String, required: true, index: true },
-    state: { type: String, required: true },
-    pincode: { type: String, required: true },
-    country: { type: String, default: "India" },
-     // 📍 GeoJSON location
-    location: {
-      type: {
-        type: String,
-        enum: ["Point"],
-        default: "Point",
-      },
-      coordinates: {
-        type: [Number], // [longitude, latitude]
-        required: true,
-      },
-    },
-  },
-
-  { _id: false }
-);
+import { BloodGroup, ILocation, IPatient } from "../types/interface/patient.interface.js";
 
 const PatientSchema = new Schema<IPatient>(
   {
@@ -34,11 +10,24 @@ const PatientSchema = new Schema<IPatient>(
       index: true,
     },
 
-    age: { type: Number, required: true, min: 0 },
+    dob: { type: Date },
     gender: {
       type: String,
       enum: ["Male", "Female", "Other"],
       required: true,
+    },
+    preferredLanguage: {
+      type: String,
+      required: true,
+      default: "en",
+    },
+    height: {
+      value: { type: Number, required: true },
+      unit: { type: String, required: true, enum: ["cm", "in"], default: "cm" },
+    },
+    weight: {
+      value: { type: Number, required: true },
+      unit: { type: String, required: true, enum: ["kg", "lb"], default: "kg" },
     },
 
     bloodGroup: {
@@ -47,8 +36,16 @@ const PatientSchema = new Schema<IPatient>(
       required: true,
     },
 
-    height: { type: Number, required: true },
-    weight: { type: Number, required: true },
+    location: {
+      type: Schema.Types.ObjectId,
+      ref: "Location",
+      required: true,
+    },
+    emergencyContact: {
+      name: { type: String},
+      phone: { type: String },
+      relationship: { type: String },
+    },
 
     allergies: {
       type: [String],
@@ -64,19 +61,11 @@ const PatientSchema = new Schema<IPatient>(
       type: [String],
       default: [],
     },
-
-    address: {
-      type: AddressSchema,
-      required: true,
+    lifestyle: {
+      smoking: { type: Boolean, default: false },
+      alcohol: { type: Boolean, default: false },
+      exercise: { type: String, default: "none" },
     },
-
-    preferredLanguage: {
-      type: String,
-      required: true,
-      default: "English",
-    },
-
-
     createdAt: {
       type: Date,
       default: Date.now,
@@ -87,9 +76,6 @@ const PatientSchema = new Schema<IPatient>(
   }
 );
 
-/**
- * Model Export
- */
 export const PatientModel = mongoose.model<IPatient>(
   "Patient",
   PatientSchema

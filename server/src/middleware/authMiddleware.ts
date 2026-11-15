@@ -1,17 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import { decodeToken } from "../utils/token";
-
-export interface JwtPayload {
-    id: string;
-    iat: number;
-    exp: number
-}
-
-export interface AuthRequest extends Request {
-    user?: JwtPayload;
-}
-
+import { decodeToken } from "../utils/jwt-token.js";
+import { AuthRequest } from "../types/auth.interface.js";
+ 
 export const authMiddleware = (
     req: AuthRequest,
     res: Response,

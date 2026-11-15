@@ -1,33 +1,39 @@
 import { useEffect, useState } from "react";
 import { api } from "../utils";
-import { AuthContext, type User } from "./AuthContext";
-import type { LoginPayload } from "../utils/auth/auth.api";
+import { AuthContext } from "./AuthContext";
+import type { RegisterPayload, User, LoginPayload } from "../types/Auth.interface";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User>(null);
-  const [loading, setLoading] = useState(true);
-
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    let isMounted = true;
-
+    let mounted = true;
     const initAuth = async () => {
       try {
         const res = await api.auth.me();
-        if (isMounted) setUser(res.user);
+
+        if (mounted) {
+          setUser(res.user);
+        }
       } catch {
-        if (isMounted) setUser(null);
+        if (mounted) {
+          setUser(null);
+        }
       } finally {
-        if (isMounted) setLoading(false);
+        if (mounted) {
+          setLoading(false);
+        }
       }
     };
 
     initAuth();
 
     return () => {
-      isMounted = false;
+      mounted = false;
     };
   }, []);
+
 
   const refreshAuth = async () => {
     setLoading(true);
@@ -41,30 +47,41 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+
+  const CreateAccount = async (data: RegisterPayload) => {
+    try {
+      setLoading(true);
+      const res = await api.auth.createAccount(data);
+      setUser(res.user);
+      return res;
+    } catch {
+      setUser(null);
+      throw new Error("CreateAccount failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const Login = async (data: LoginPayload) => {
     try {
       setLoading(true);
-
-      await api.auth.login(data); // just sets cookie
-
-      await refreshAuth(); // call /me internally
-
+      const res = await api.auth.login(data);
+      setUser(res.user);
     } catch {
       setUser(null);
-    }finally{
+    } finally {
       setLoading(false);
-      
     }
   };
 
   const logout = async () => {
     await api.auth.logout();
     setUser(null);
-    
+
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, refreshAuth, Login, logout }}>
+    <AuthContext.Provider value={{ user, loading, refreshAuth, CreateAccount, Login, logout }}>
       {children}
     </AuthContext.Provider>
   );

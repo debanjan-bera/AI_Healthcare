@@ -1,21 +1,17 @@
 
-import { login, logout, me } from "./auth/auth.api";
-import { createSession, getAllSessions, getChatMessages, sendMessages, uploadPdf } from "./chat/chat.api";
+import { login, logout, me, createAccount } from "./auth/auth.api";
+import { createPatient } from "./auth/patient.api";
 
 export const api = {
     auth: {
         login,
         me,
-        logout
+        logout,
+        createAccount
 
     },
-    chat:{
-        createSession,
-        sendMessages,
-        getChatMessages,
-        getAllSessions,
-        uploadPdf
-
+    patient: {
+        createPatient
     }
 
 };

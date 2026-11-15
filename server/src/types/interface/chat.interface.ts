@@ -1,14 +1,15 @@
+import mongoose from "mongoose";
+
 export enum ChatRole {
   USER = "user",
   ASSISTANT = "assistant",
-  SYSTEM = "system"
+  SYSTEM = "system",
 }
 
 export type Stage =
   | "greeting"
   | "question"
   | "assessment"
-  | "complete"
   | "emergency";
 
 export type RiskLevel = "low" | "medium" | "high";
@@ -22,14 +23,18 @@ export type NextActionType =
 // 🔥 Meta info for AI decisions
 export interface IMessageMeta {
   stage?: Stage | null;
-  riskLevel?: RiskLevel | null;
+  risk?:{
+    level: RiskLevel;
+    reason?: string;
+  }
+  questions?: string[] | null;
   advice?: string;
 
   nextAction?: {
-    actionType: NextActionType;
+    type: NextActionType;
     reason?: string;
   };
-  fileName?: string;
+  fileName?: string | null;
   medicines?: string[];
 }
 
@@ -41,13 +46,14 @@ export interface IMessage {
   langCode?: string;
   meta?: IMessageMeta;
 }
-
-// 🔥 Chat document
 export interface IChat {
   _id?: string;
-  userId: string;
+   userId: mongoose.Types.ObjectId | string;
   sessionId: string;
-  chatName: string;
+  title: string;
+  totalMessages: number;
+  isPinned: boolean;
+  isArchived: boolean;
   messages: IMessage[];
   createdAt?: string;
   updatedAt?: string;

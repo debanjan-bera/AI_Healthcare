@@ -1,18 +1,13 @@
 import { createContext } from 'react';
-import type { LoginPayload } from '../utils/auth/auth.api';
+import type { AuthResponse, LoginPayload, RegisterPayload } from '../types/Auth.interface';
+import type { User } from '../types/Auth.interface';
 
-export type User = {
-  id: string;
-  name: string;
-  email: string;
-  mobile: number;
-  role: string;
-} | null;
 
 type AuthContextType = {
   user: User;
   loading: boolean;
   refreshAuth: () => Promise<void>;
+  CreateAccount: (data: RegisterPayload) => Promise<Omit<AuthResponse, "user.role">>;
   Login: (data: LoginPayload) => Promise<void>;
   logout: () => Promise<void>;
 };

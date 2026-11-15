@@ -1,34 +1,22 @@
-import type { BloodGroupType } from "./Patient.interface";
+export type User = {
+    id: string;
+    name: string;
+    mobile: number;
+    role: string;
+    profileCompleted: boolean;
+} | null;
 
-export type RegisterForm = {
-    fullName: string;
-    email: string;
+export interface LoginPayload {
     mobile: string;
     password: string;
-    role: string;
-    age: number;
-    gender: string;
-    bloodGroup: BloodGroupType;
-    height?: number;
-    weight?: number;
-    allergies?: string;
-    medicalHistory?: string;
-    currentMedicines?: string;
-    licenseNumber?: string;
-    hospitalName?: string;
-    hospitalType?: string;
-    pharmacyName?: string;
-    deliveryAvailable?: boolean;
-    clinicName?: string;
-    clinicType?: string;
-    specialization?: string;
-    experience?: number;
-    street?: string;
-    city?: string;
-    state?: string;
-    pincode?: string;
-    country?: string;
-    latitude?: number;
-    longitude?: number;
+}
+export interface RegisterPayload extends LoginPayload {
+    name: string
+}
+export interface AuthResponse {
+    success: boolean;
+    message: string;
+    user: User;
+}
 
-};
+

@@ -14,10 +14,73 @@ export type BloodGroupType =
   typeof BloodGroup[keyof typeof BloodGroup];
 
 
-export interface RegisterFormPersonal {
-  age: number;
-  gender: string;
-  height?: number;
-  weight?: number;
-  bloodGroup: BloodGroupType
+export type RegisterFormForPateint = {
+  gender: "" | "Male" | "Female" | "Other";
+  dob: string;
+  height: number;
+  weight: number;
+  heightUnit: "cm" | "in";
+  weightUnit: "kg" | "lb";
+  bloodGroup: BloodGroupType;
+  address: string;
+  pincode: string;
+  city: string;
+  state: string;
+  country?: string;
+  latitude: number;
+  longitude: number;
+  emergencyContactName: string;
+  emergencyRelationship: string;
+  emergencyPhone: string;
+  allergies?: string[];
+  medicalHistory?: string[];
+  currentMedicines?: string[];
+  smoke: boolean;
+  alcohol: boolean;
+  exercise: "Daily" | "Weekly" | "Occasionally" | "Rarely";
+  agreedToDisclaimer: boolean;
+  preferredLanguage: string;
+  profilePicture: string | File;
+}
+
+
+export interface CreatePatientPayload {
+  dob: Date;
+  gender: "Male" | "Female" | "Other";
+  preferredLanguage: string;
+  bloodGroup: BloodGroupType;
+
+  height: { value: number; unit: string }; // cm
+  weight: { value: number; unit: string }; // kg
+
+  location: {
+    address: string;
+    pincode: string;
+    city: string;
+    state: string;
+    country?: string;
+    coordinates: {
+      latitude: number;
+      longitude: number;
+    };
+  }
+  emergencyContact: {
+    name: string;
+    phone: string;
+    relationship: string;
+  };
+  allergies: string[];
+  medicalHistory: string[];
+  currentMedicines: string[];
+  lifestyle: {
+    smoking: boolean;
+    alcohol: boolean;
+    exercise: string;
+  };
+}
+
+export interface CreatePatientResponse {
+  success: boolean,
+  message: string,
+  patient: CreatePatientPayload
 }

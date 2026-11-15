@@ -10,16 +10,17 @@ export enum BloodGroup {
   O_POSITIVE = "O+",
   O_NEGATIVE = "O-",
 }
-export interface IAddress {
-  street: string;
+export interface ILocation {
+  address: string;
+  pincode: string;
   city: string;
   state: string;
-  pincode: string;
   country?: string;
-  location: {
-    type: string;
-    coordinates: number[];
+  coordinates: {
+    latitude: number;
+    longitude: number;
   };
+  
 }
 
 /**
@@ -28,20 +29,29 @@ export interface IAddress {
 export interface IPatient extends Document {
   userId: Types.ObjectId;
 
-  age: number;
+  dob: Date;
   gender: "Male" | "Female" | "Other";
+  preferredLanguage: string;
   bloodGroup: BloodGroup;
+  
+  height: { value: number; unit: string }; // cm
+  weight: { value: number; unit: string }; // kg
+  
+  location: Types.ObjectId; // Reference to Location collection
 
-  height: number; // cm
-  weight: number; // kg
-
+  emergencyContact: {
+    name: string;
+    phone: string;
+    relationship: string;
+  };
   allergies?: string[];
   medicalHistory?: string[];
   currentMedicines?: string[];
-
-  address: IAddress;
-
-  preferredLanguage: string;
+  lifestyle?: {
+    smoking: boolean;
+    alcohol: boolean;
+    exercise: string;
+  };
 
   createdAt: Date;
 }

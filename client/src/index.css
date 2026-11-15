@@ -1,29 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-inter: "Inter", sans-serif;
-  --color-primary: #0066ff;
-  --color-primary-dark: #0052cc;
-  --color-primary-light: #e6f0ff;
+  /* Stitch Design System Color Palette */
+  --color-surface-container-low: #f6f2f5;
+  --color-tertiary-fixed: #ffdbd0;
+  --color-on-surface-variant: #3c4a3c;
+  --color-error-container: #ffdad6;
+  --color-surface: #fcf8fb;
+  --color-secondary-fixed: #e8deff;
+  --color-secondary-container: #7c4dff;
+  --color-tertiary-container: #ff8f6c;
+  --color-background: #fcf8fb;
+  --color-on-error-container: #93000a;
+  --color-on-secondary-container: #fcf6ff;
+  --color-on-tertiary-fixed: #3a0b00;
+  --color-on-primary-fixed: #002108;
+  --color-primary-fixed: #69ff87;
+  --color-on-error: #ffffff;
+  --color-on-surface: #1c1b1d;
+  --color-surface-container-highest: #e5e1e4;
+  --color-outline: #6c7b6a;
+  --color-on-secondary-fixed: #20005f;
+  --color-tertiary: #9f4122;
+  --color-on-primary-fixed-variant: #00531e;
+  --color-on-tertiary: #ffffff;
+  --color-surface-dim: #dcd9dc;
+  --color-inverse-surface: #313032;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed-dim: #3ce36a;
+  --color-on-secondary: #ffffff;
+  --color-secondary: #632ce5;
+  --color-surface-container-high: #eae7ea;
+  --color-surface-variant: #e5e1e4;
+  --color-secondary-fixed-dim: #cdbdff;
+  --color-on-secondary-fixed-variant: #4f00d0;
+  --color-inverse-primary: #3ce36a;
+  --color-surface-container: #f0edf0;
+  --color-surface-bright: #fcf8fb;
+  --color-on-primary-container: #004c1b;
+  --color-primary-container: #00c853;
+  --color-on-tertiary-container: #782507;
+  --color-surface-container-lowest: #ffffff;
+  --color-tertiary-fixed-dim: #ffb59e;
+  --color-surface-tint: #006e2a;
+  --color-inverse-on-surface: #f3f0f2;
+  --color-on-tertiary-fixed-variant: #7f2a0d;
+  --color-error: #ba1a1a;
+  --color-primary: #006e2a;
+  --color-on-background: #1c1b1d;
+  --color-outline-variant: #bbcbb8;
+
+  /* Custom Font Families extended in theme */
+  --font-body-lg: "Inter", sans-serif;
+  --font-label-sm: "Inter", sans-serif;
+  --font-headline-lg: "Plus Jakarta Sans", sans-serif;
+  --font-headline-lg-mobile: "Plus Jakarta Sans", sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-headline-md: "Plus Jakarta Sans", sans-serif;
+  --font-label-md: "Inter", sans-serif;
+  --font-body-sm: "Inter", sans-serif;
+
+  /* Custom Font Sizes (text-* classes) */
+  --size-body-lg: 18px;
+  --size-label-sm: 12px;
+  --size-headline-lg: 32px;
+  --size-headline-lg-mobile: 24px;
+  --size-display: 48px;
+  --size-body-md: 16px;
+  --size-headline-md: 24px;
+  --size-label-md: 14px;
+  --size-body-sm: 14px;
+
+  /* Custom Border Radii */
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  /* Custom Spacings (p-*, m-*, gap-* etc.) */
+  --spacing-margin-mobile: 16px;
+  --spacing-unit: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-container-max: 1280px;
+  --spacing-margin-desktop: 48px;
+  --spacing-gutter: 24px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-lg: 32px;
 }
 
-body {
-  font-family: var(--font-inter);
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Material Symbols styles */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
 }
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+
+/* Custom Stitch Background Gradients and Utilities */
+@utility bg-mesh-gradient {
+  background-color: #fcf8fb;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255, 219, 208, 0.4) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(232, 222, 255, 0.4) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(252, 248, 251, 1) 0px, transparent 100%);
 }
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
+
+@utility bg-soft-gradient {
+  background: linear-gradient(135deg, #FFF1F0 0%, #E8DEFF 50%, #F0F9FF 100%);
 }
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #e2e8f0;
-  border-radius: 10px;
+
+@utility ai-bubble-gradient {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
 }
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #cbd5e1;
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+}
+
+@utility soft-card-shadow {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+@utility step-gradient {
+  background: linear-gradient(90deg, #00c853 0%, #3ce36a 100%);
+}
+
+input:focus {
+  outline: 2px solid #00c853;
+  outline-offset: 1px;
 }

@@ -1,5 +1,15 @@
 import { Document, Types } from "mongoose";
-import { IAddress } from "./patient.interface";
+export interface IAddress {
+  street: string;
+  city: string;
+  state: string;
+  pincode: string;
+  country?: string;
+  location: {
+    type: "Point";
+    coordinates: number[];
+  };
+}
 
 export interface IPharmacy extends Document {
   userId: Types.ObjectId;

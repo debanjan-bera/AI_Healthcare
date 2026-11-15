@@ -1,39 +1,53 @@
-import { Request, Response } from 'express';
-import { PatientModel } from '../../model/Patient.model';
+import { Request, Response } from "express";
+import userModel from "../../model/user.model.js";
+import { UserRole } from "../../types/interface/user.type.js";
+import { PatientModel } from "../../model/Patient.model.js";
+import { AuthRequest } from "../../types/auth.interface.js";
+import { checkExistingUser } from "../services/auth.service.js";
+import { checkExistingPatient, registerPatientService } from "../services/patient.service.js";
 
-export const createPatient = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const { name, age, gender, medical_history, contact } = req.body;
-        const newPatient = new PatientModel({ name, age, gender, medical_history, contact });
-        await newPatient.save();
-        res.status(201).json({ success: true, data: newPatient });
-    } catch (error: any) {
-        console.error("Error creating patient:", error.message);
-        res.status(500).json({ success: false, error: 'Failed to create patient' });
-    }
-};
+export class PatientController {
+    static async registerPatient(req: AuthRequest, res: Response) {
+        try {
+            const authUserId = req.user?.id;
+            if (!authUserId) {
+                return res.status(401).json({ success: false, message: 'Unauthorized' });
+            }
+            const {
+                dob, gender, preferredLanguage,
+                height, weight, bloodGroup,
+                location
+            } = req.body;
 
-export const getPatient = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const { id } = req.params;
-        const patient = await PatientModel.findById(id);
-        if (!patient) {
-            res.status(404).json({ success: false, error: 'Patient not found' });
-            return;
+            if (!dob || !gender || !preferredLanguage || !height || !weight || !bloodGroup || !location ) {
+                return res.status(400).json({ success: false, message: 'Missing required fields' });
+            }
+            const existingUser = await checkExistingUser(authUserId);
+            if (!existingUser) {
+                return res.status(404).json({
+                    success: false,
+                    message: "User not found"
+                });
+            }
+            const existingPatient = await checkExistingPatient(authUserId);
+
+            if (existingPatient) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Patient profile already exists for this user"
+                });
+            }
+            const { patientData, updatedUser, locationData } = await registerPatientService(authUserId, req.body);
+            if (!updatedUser) {
+                return res.status(404).json({ success: false, message: 'User not found' });
+            }
+
+            return res.status(201).json({ success: true, message: 'Patient registered successfully', patient: patientData, location: locationData });
+
+        } catch (err) {
+            return res.status(500).json({ success: false, message: err instanceof Error ? err.message : 'An error occurred' });
         }
-        res.status(200).json({ success: true, data: patient });
-    } catch (error: any) {
-        console.error("Error fetching patient:", error.message);
-        res.status(500).json({ success: false, error: 'Failed to fetch patient' });
-    }
-};
 
-export const getAllPatients = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const patients = await PatientModel.find();
-        res.status(200).json({ success: true, data: patients });
-    } catch (error: any) {
-        console.error("Error fetching patients:", error.message);
-        res.status(500).json({ success: false, error: 'Failed to fetch patients' });
+
     }
-};
+}

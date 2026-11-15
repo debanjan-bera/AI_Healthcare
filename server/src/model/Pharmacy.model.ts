@@ -1,6 +1,5 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
-import { IPharmacy } from "../types/interface/Pharmacy.interface";
-import { IAddress } from "../types/interface/patient.interface";
+import { IPharmacy, IAddress } from "../types/interface/Pharmacy.interface.js";
 
 const AddressSchema = new Schema<IAddress>(
     {

@@ -1,162 +1,132 @@
 import { Request, Response } from "express";
-import userModel from "../../model/user.model";
-import argon2 from 'argon2';
-import { IUser } from "../../types/user.type";
-import { createToken } from "../../utils/token";
-import { registerService } from "../services/auth.service";
-import { AuthRequest } from "../../middleware/authMiddleware";
+import userModel from "../../model/user.model.js";
+import { IUser } from "../../types/interface/user.type.js";
+import { createToken } from "../../utils/jwt-token.js";
+import { comparePassword, registerService } from "../services/auth.service.js";
+import { AuthRequest } from "../../types/auth.interface.js";
 
-export const loginController = async (req: Request, res: Response) => {
-    try {
-        const { mobile, password } = req.body;
+export class AuthController {
+    static async registerController(req: Request, res: Response) {
+        try {
+            const { name, mobile, password } = req.body;
 
-        if (!mobile || !password) {
-            return res.status(400).json({
-                successful: false,
-                message: 'All fields are required!'
-            })
-        }
-
-        const userExists: IUser | null = await userModel.findOne({ mobile });
-
-        if (!userExists) {
-            return res.status(404).json({
-                successful: false,
-                message: 'User not exists!'
-            })
-        }
-        const verifyPassword = await argon2.verify(userExists.password, password);
-
-        if (!verifyPassword) {
-            return res.status(401).json({
-                successful: false,
-                message: 'Password is incorrect!'
-            })
-        }
-        const token = createToken(userExists);
-
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: true, // true in production (HTTPS)
-            sameSite: "none",
-            maxAge: 24 * 60 * 60 * 1000
-        });
-
-        return res.json({
-            successful: true,
-            message: `User with mobile:${mobile} logged in successfully!`,
-            user: {
-                id: userExists._id,
-                name: userExists.name,
-                mobile: userExists.mobile,
-                email: userExists.email,
-                role: userExists.role
+            if (!name || !mobile || !password) {
+                return res.status(400).json({
+                    success: false,
+                    message: "All fields are required"
+                });
             }
-        })
-
-    } catch (err) {
-        return res.status(500).json({
-            success: false,
-            message: "Server error",
-        });
-
-    }
-
-}
-
-
-export const registerController = async (req: Request, res: Response) => {
-    try {
-        const { name, email, mobile, password, role } = req.body;
-        if (!name || !email || !mobile || !password || !role) {
-            return res.status(400).json({
-                successful: false,
-                message: 'All fields are required!'
-            })
-        }
-
-        // if (role === 'admin') {
-        //     res.status(400).json({
-        //         successful: false,
-        //         message: 'Admin registration is not allowed!'
-        //     })
-        // }
-        // if (!['patient', 'doctor', 'pharmacy', 'clinic_admin', 'hospital_admin'].includes(role)) {
-        //     res.status(400).json({
-        //         successful: false,
-        //         message: 'Invalid role specified!'
-        //     })
-        // }
-
-        const userExists = await userModel.findOne({ mobile });
-        if (userExists) {
-            return res.status(400).json({
-                successful: false,
-                message: 'User already exists!'
-            })
-        }
-        const newUser = await registerService(req.body);
-        const token = createToken(newUser);
-
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: false, // true in production (HTTPS)
-            sameSite: "lax",
-            maxAge: 24 * 60 * 60 * 1000
-        });
-        return res.status(201).json({
-            successful: true,
-            token,
-            message: 'User registered successfully!',
-            user: {
-                name: newUser.name,
-                email: newUser.email,
-                mobile: newUser.mobile,
-                role: newUser.role
+            
+            const existingUser = await userModel.findOne({ mobile });
+            if (existingUser) {
+                return res.status(400).json({
+                    success: false,
+                    message: "User already exists"
+                });
             }
-        });
 
-    } catch (error) {
-        return res.status(400).json({
-            successful: false,
-            message: 'Registration failed!',
-        });
-    }
+            const newUser: IUser = await registerService(req.body);
+            const token = createToken(newUser._id as string);
 
-}
+            res.cookie("token", token,
+                { httpOnly: true, secure: false, sameSite: "lax", maxAge: 7 * 24 * 60 * 60 * 1000 });
 
+            return res.status(201).json({
+                success: true,
+                message: "User registered successfully",
+                token,
+                user: {
+                    id: newUser._id,
+                    name: newUser.name,
+                    mobile: newUser.mobile,
+                    profileCompleted: newUser.profileCompleted,
+                }
+            });
 
-export const me = async (req: AuthRequest, res: Response) => {
-    try {
-        const user = await userModel.findById(req.user?.id);
-
-        if (!user) {
-            return res.status(404).json({
+        } catch (err) {
+            return res.status(500).json({
                 success: false,
-                message: "User not found",
+                message: err instanceof Error ? err.message : "Internal server error"
             });
         }
+    }
+    static async loginController(req: Request, res: Response) {
+        try {
+            const { mobile, password } = req.body;
+            if (!mobile || !password) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Mobile and password are required"
+                });
+            }
+            const user = await userModel.findOne({ mobile });
+            if (!user) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid mobile or password"
+                });
+            }
+            const verifyPassword = await comparePassword(password, user.password);
 
-        return res.status(200).json({
+            if (!verifyPassword) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid password"
+                });
+            }
+            const token = createToken(user._id as string);
+
+            res.cookie("token", token,
+                { httpOnly: true, secure: false, sameSite: "lax", maxAge: 7 * 24 * 60 * 60 * 1000 });
+
+            return res.status(201).json({
+                success: true,
+                message: "User logged in successfully",
+                token,
+                user: {
+                    id: user._id,
+                    name: user.name,
+                    mobile: user.mobile,
+                    role: user.role,
+                    profileCompleted: user.profileCompleted,
+                }
+            });
+
+        } catch (err) {
+            return res.status(500).json({
+                success: false,
+                message: "Internal server error"
+            });
+        }
+    }
+    static async me(req: AuthRequest, res: Response) {
+        try {
+            const user = await userModel.findById(req.user?.id);
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: "User not found"
+                });
+            }
+            return res.json({
+                success: true,
+                message: "User details",
+                user
+            });
+        } catch (err) {
+            return res.status(500).json({
+                success: false,
+                message: "Internal server error"
+            });
+        }
+    }
+    static logoutController = (req: Request, res: Response) => {
+        res.clearCookie("token");
+        return res.json({
             success: true,
-            message: "User is verified",
-            user: {
-                id: user.id,
-                name: user.name,
-                role: user.role,
-                email: user.email,
-                mobile: user.mobile,
-            },
-        });
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: "Server error",
+            message: "Logged out"
         });
     }
+
 }
 
-export const logoutController = (req: Request, res: Response) => {
-    res.clearCookie("token");
-    res.json({ message: "Logged out" });
-}
