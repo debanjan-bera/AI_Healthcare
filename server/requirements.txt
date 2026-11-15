@@ -1,0 +1,85 @@
+# ==============================
+# Backend - FastAPI
+# ==============================
+fastapi
+uvicorn[standard]
+python-multipart
+PyJWT[crypto]
+pwdlib[argon2]
+pydantic[email]
+
+
+pymongo 
+pydantic-settings
+
+# ==============================
+# Environment & Configuration
+# ==============================
+python-dotenv
+
+# ==============================
+# Frontend / UI
+# ==============================
+streamlit
+
+# ==============================
+# Audio / YouTube Processing
+# ==============================
+# openai-whisper
+pipecat-ai[daily,sarvam,simli,webrtc,runner,google]
+pipecat-ai[webrtc-video]
+loguru
+sarvamai
+yt-dlp
+pydub
+ffmpeg-python
+
+# ==============================
+# LangChain
+# ==============================
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+
+# ==============================
+# Mistral LLM
+# ==============================
+langchain-mistralai
+
+# ==============================
+# Google Gemini
+# ==============================
+langchain-google-genai
+google-generativeai
+
+# ==============================
+# LangGraph - Agent Workflow
+# ==============================
+langgraph
+
+# ==============================
+# HuggingFace Embeddings
+# ==============================
+
+sentence-transformers
+transformers
+
+# ==============================
+# Vector Databases
+# ==============================
+chromadb
+pinecone
+
+# ==============================
+# PDF / TXT Export
+# ==============================
+reportlab
+
+# ==============================
+# LiveKit Agent
+# ==============================
+livekit-agents==1.8.10
+livekit-plugins-sarvam==1.8.10
+livekit-plugins-google==1.8.10
+livekit-plugins-ai-coustics==0.3.5
