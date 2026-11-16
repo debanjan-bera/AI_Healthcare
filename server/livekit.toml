@@ -1,0 +1,6 @@
+[project]
+  subdomain = "vocie-agent-jwo3hw4l"
+
+[agent]
+  id = "CA_SdEJDbmRxaNT"
+  name = "healthcare-agent"

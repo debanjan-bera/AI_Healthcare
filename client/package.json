@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@livekit/components-react": "^2.9.24",
+    "@livekit/components-react": "^2.9.25",
     "@livekit/components-styles": "^1.2.0",
     "@pipecat-ai/client-js": "^1.14.0",
     "@pipecat-ai/client-react": "^1.9.0",
@@ -18,7 +18,7 @@
     "@pipecat-ai/small-webrtc-transport": "1.11.1",
     "@tailwindcss/vite": "^4.2.4",
     "axios": "^1.15.2",
-    "livekit-client": "^2.23.0",
+    "livekit-client": "^2.24.1",
     "lucide-react": "^1.11.0",
     "motion": "^13.2.0",
     "react": "19.3.1",

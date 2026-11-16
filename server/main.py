@@ -1,12 +1,13 @@
-from routes.livekit import router as livekit_router
+import uvicorn
 from fastapi import FastAPI,Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 from contextlib import asynccontextmanager
 
-from routes.auth_router import router as auth_router
 from db.mongo_db import client
+
+from routes.auth_router import router as auth_router
+from server.routes.livekit_token import router as livekit_router 
 from core.exceptions import AppException
 
 

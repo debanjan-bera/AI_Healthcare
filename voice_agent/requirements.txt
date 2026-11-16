@@ -1,0 +1,17 @@
+
+python-dotenv
+
+# ==============================
+# LiveKit Agent
+# ==============================
+livekit-api  
+livekit-agents[google]
+livekit-agents[sarvam]~=1.8
+loguru
+
+
+
+livekit-agents==1.8.10
+livekit-plugins-sarvam==1.8.10
+livekit-plugins-google==1.8.10
+livekit-plugins-ai-coustics==0.3.5

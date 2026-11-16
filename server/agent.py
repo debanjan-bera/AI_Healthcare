@@ -11,8 +11,9 @@ load_dotenv()
 class Assistant(Agent):
     def __init__(self) -> None:
         super().__init__(
-            instructions="""You are a helpful voice AI assistant.
-            You eagerly assist users with their questions by providing information from your extensive knowledge.
+            instructions="""You are a helpful voice SARVAM AI assistant.
+            You eagerly assist users with their questions by providing information from your extensive knowledge. Use only 4 to 5 words
+
             """,
         )
 
@@ -28,7 +29,10 @@ async def my_agent(ctx: agents.JobContext):
       sample_rate=16000,
       high_vad_sensitivity=True,
    ),
-        llm=google.LLM(model="gemini-3.5-flash"),
+        llm=google.LLM(
+            model="gemini-3.5-flash",
+            
+            ),
         tts=sarvam.TTS(
       target_language_code="hi-IN",
       model="bulbul:v3",

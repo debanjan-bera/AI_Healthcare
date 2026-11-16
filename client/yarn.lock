@@ -274,22 +274,22 @@
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
 
-"@floating-ui/core@^1.7.5":
+"@floating-ui/core@^1.8.0":
   version "1.8.0"
-  resolved "https://registry.npmjs.org/@floating-ui/core/-/core-1.8.0.tgz"
+  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.8.0.tgz#d01c0bbea02e4a57f6fd7d5de6fc2c5c7dca40e1"
   integrity sha512-0CIZ5itps/8x7BG8dEIhs53BvCUH2PCoogtakwRTut+Arm58sJooJ0AuZhLw2HJYIR5cMLNPBSS728sPho2khQ==
   dependencies:
     "@floating-ui/utils" "^0.2.12"
 
-"@floating-ui/dom@1.7.6":
-  version "1.7.6"
-  resolved "https://registry.npmjs.org/@floating-ui/dom/-/dom-1.7.6.tgz"
-  integrity sha512-9gZSAI5XM36880PPMm//9dfiEngYoC6Am2izES1FF406YFsjvyBMmeJ2g4SAju3xWwtuynNRFL2s9hgxpLI5SQ==
+"@floating-ui/dom@1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.8.0.tgz#8a20e6facbe2456afdbeb6c8b968a72df689cf63"
+  integrity sha512-yXSrzeHZBTZadLOlfyhCkJHNeLJnHRnRInwdZ40L7ZiaAtrBwoYlsDrX3v5zB1Utk7CLfzcOVnVVWoXEky7Ceg==
   dependencies:
-    "@floating-ui/core" "^1.7.5"
-    "@floating-ui/utils" "^0.2.11"
+    "@floating-ui/core" "^1.8.0"
+    "@floating-ui/utils" "^0.2.12"
 
-"@floating-ui/utils@^0.2.11", "@floating-ui/utils@^0.2.12":
+"@floating-ui/utils@^0.2.12":
   version "0.2.12"
   resolved "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.12.tgz"
   integrity sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==
@@ -359,21 +359,21 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@livekit/components-core@0.12.15":
-  version "0.12.15"
-  resolved "https://registry.npmjs.org/@livekit/components-core/-/components-core-0.12.15.tgz"
-  integrity sha512-bDkK+jkPMgyT4a5lZmdcuc/hZ8fZUrXW+qQPNHVeSpXCBMzk5q9QWzx+HPtTsPJ8hnncWGfoT81RnXHBsy+Z8g==
+"@livekit/components-core@0.12.16":
+  version "0.12.16"
+  resolved "https://registry.yarnpkg.com/@livekit/components-core/-/components-core-0.12.16.tgz#5d35001b36117825e5a376fb5d8d6da63696d695"
+  integrity sha512-jcXuNeHKGkXgRiT4wniWRpg+TKUSoTL9da01tMxxKGmjp98zB2DVgPmk1fBZfgDVjPBF+jsZe/WkeFAbvJu4Gw==
   dependencies:
-    "@floating-ui/dom" "1.7.6"
-    loglevel "1.9.1"
+    "@floating-ui/dom" "1.8.0"
+    loglevel "1.9.2"
     rxjs "7.8.2"
 
-"@livekit/components-react@^2.9.24":
-  version "2.9.24"
-  resolved "https://registry.npmjs.org/@livekit/components-react/-/components-react-2.9.24.tgz"
-  integrity sha512-qw5Oy1EfPg1f/xrKYrFielSrmtxY8BZ9mDt6299G5aikotQIztmldBfTNosrVS7VSNit7qeYfOFSyKaML20W6Q==
+"@livekit/components-react@^2.9.25":
+  version "2.9.25"
+  resolved "https://registry.yarnpkg.com/@livekit/components-react/-/components-react-2.9.25.tgz#f7d32cde5b1c2350f5081fbd6d9a92b4ac43f7c9"
+  integrity sha512-ic7ULhAr9DOUPBPxfv1njFt2MMbPr2Um74ApAJAwqD7wPawgUzt5f+DiGlJH+y35/PUlY6EOSgyJ15fZTZ5PFw==
   dependencies:
-    "@livekit/components-core" "0.12.15"
+    "@livekit/components-core" "0.12.16"
     clsx "2.1.1"
     events "^3.3.0"
     jose "^6.0.12"
@@ -381,7 +381,7 @@
 
 "@livekit/components-styles@^1.2.0":
   version "1.2.0"
-  resolved "https://registry.npmjs.org/@livekit/components-styles/-/components-styles-1.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/@livekit/components-styles/-/components-styles-1.2.0.tgz#eaff70405910a428ad580dc19910fa97b5019fef"
   integrity sha512-74/rt0lDh6aHmOPmWAeDE9C4OrNW9RIdmhX/YRbovQBVNGNVWojRjl3FgQZ5LPFXO6l1maKB4JhXcBFENVxVvw==
 
 "@livekit/mutex@1.1.1":
@@ -389,10 +389,10 @@
   resolved "https://registry.npmjs.org/@livekit/mutex/-/mutex-1.1.1.tgz"
   integrity sha512-EsshAucklmpuUAfkABPxJNhzj9v2sG7JuzFDL4ML1oJQSV14sqrpTYnsaOudMAw9yOaW53NU3QQTlUQoRs4czw==
 
-"@livekit/protocol@1.52.1":
-  version "1.52.1"
-  resolved "https://registry.npmjs.org/@livekit/protocol/-/protocol-1.52.1.tgz"
-  integrity sha512-X8DxKlNbzk6Lh+v630+mjdFHSotdAFwIyzxSRSUql2DbTxCnlpa7JsvFGc6Na3mXiex2OFh0iiQtWwOBP0rIYA==
+"@livekit/protocol@1.53.0":
+  version "1.53.0"
+  resolved "https://registry.yarnpkg.com/@livekit/protocol/-/protocol-1.53.0.tgz#c97e6ab53b8f7cab3360d31c76d3cfa97f68848a"
+  integrity sha512-dM562Q7sEQbJ9ZghjIpcVuRxRApGNwJW/JfXRub+dJT8J1cC2Tep0SyYkDzOawix7+0x969fnjXt0qEZOxkjbQ==
   dependencies:
     "@bufbuild/protobuf" "^1.10.0"
 
@@ -725,6 +725,11 @@
   integrity sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==
   dependencies:
     csstype "^3.2.2"
+
+"@types/sdp-transform@^2.15.0":
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/@types/sdp-transform/-/sdp-transform-2.15.0.tgz#f59a33ec631374794c2affc4c63ef60613285983"
+  integrity sha512-ikIFF0EaYt/2XetIYYVeMj6SB52oVXFasJUXDzWHgzNJS5ep2Pbsu7f8f3Za+dEie8HQtt3Zr9mHYBpWT0XgxQ==
 
 "@typescript-eslint/eslint-plugin@8.59.0":
   version "8.59.0"
@@ -1590,13 +1595,14 @@ lightningcss@1.32.0, lightningcss@^1.32.0:
     lightningcss-win32-arm64-msvc "1.32.0"
     lightningcss-win32-x64-msvc "1.32.0"
 
-livekit-client@^2.23.0:
-  version "2.23.0"
-  resolved "https://registry.npmjs.org/livekit-client/-/livekit-client-2.23.0.tgz"
-  integrity sha512-j9Kg86nJjBjNFUD+ukp2jwMCGa0k+YD5gU//RzAM+ZY3pbG631QCte7fQjwqWMmtBzhDJL9nKYuOLMv/9IbAxg==
+livekit-client@^2.24.1:
+  version "2.24.1"
+  resolved "https://registry.yarnpkg.com/livekit-client/-/livekit-client-2.24.1.tgz#49f3cd0c8338a51209583ebf05974860c50824c2"
+  integrity sha512-8kkpTPuszlkza99XOV/QZVQG7M730i5gH52j0AZzsUMQpQfI9tEgW2JfDge7+Z2ZUUuBEtV3r2MYbALHFJ2HIg==
   dependencies:
     "@livekit/mutex" "1.1.1"
-    "@livekit/protocol" "1.52.1"
+    "@livekit/protocol" "1.53.0"
+    "@types/sdp-transform" "^2.15.0"
     events "^3.3.0"
     jose "^6.1.0"
     loglevel "^1.9.2"
@@ -1628,14 +1634,9 @@ lodash@^4.17.21:
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.18.1.tgz"
   integrity sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==
 
-loglevel@1.9.1:
-  version "1.9.1"
-  resolved "https://registry.npmjs.org/loglevel/-/loglevel-1.9.1.tgz"
-  integrity sha512-hP3I3kCrDIMuRwAwHltphhDM1r8i55H33GgqjXbrisuJhF4kRhW1dNuxsRklp4bXl8DSdLaNLuiL4A/LWRfxvg==
-
-loglevel@^1.9.2:
+loglevel@1.9.2, loglevel@^1.9.2:
   version "1.9.2"
-  resolved "https://registry.npmjs.org/loglevel/-/loglevel-1.9.2.tgz"
+  resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.9.2.tgz#c2e028d6c757720107df4e64508530db6621ba08"
   integrity sha512-HgMmCqIJSAKqo68l0rS2AanEWfkxaZ5wNiEFb5ggm08lDs9Xl2KxBlX3PTcaD2chBM1gXAYf491/M2Rv8Jwayg==
 
 lru-cache@^5.1.1:
