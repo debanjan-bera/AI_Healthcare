@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from db.mongo_db import client
 
 from routes.auth_router import router as auth_router
-from server.routes.livekit_token import router as livekit_router 
+from routes.livekit_token import router as livekit_router 
 from core.exceptions import AppException
 
 

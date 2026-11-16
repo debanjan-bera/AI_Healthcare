@@ -26,8 +26,6 @@ streamlit
 # Audio / YouTube Processing
 # ==============================
 # openai-whisper
-pipecat-ai[daily,sarvam,simli,webrtc,runner,google]
-pipecat-ai[webrtc-video]
 loguru
 sarvamai
 yt-dlp

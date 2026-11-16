@@ -9,7 +9,7 @@ import {
 import { Suspense } from "react";
 
 // import VoiceAssistant from "../pages/LiveKit";
-import { PipecatProvider } from "@/pages/Pipecat";
+import LivKit from "@/pages/Livekit";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,7 +17,7 @@ export const router = createBrowserRouter(
       <Route>
         {/* Public Routes */}
         {/* <Route path="/login" element={<PublicRoute><Suspense fallback={<div>Loading...</div>}><LoginPage /></Suspense></PublicRoute>} /> */}
-        <Route path="/" element={<Suspense fallback={<div>Loading...</div>}><PipecatProvider /></Suspense>}/>
+        <Route path="/" element={<Suspense fallback={<div>Loading...</div>}><LivKit /></Suspense>}/>
 
 
       </Route>

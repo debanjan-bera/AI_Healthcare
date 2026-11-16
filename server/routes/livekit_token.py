@@ -7,13 +7,13 @@ from livekit import api
 
 from config.config import settings
 
-router = APIRouter(prefix="/livekit", tags=["LiveKit"])
+router = APIRouter()
 logger = logging.getLogger(__name__)
 
-@router.post("/token")
+@router.post("/getToken")
 async def create_token():
     room_name = "healthcare-room"
-    identity = "patient-user"
+    identity = "user"
 
     token = (
         api.AccessToken(
@@ -21,7 +21,7 @@ async def create_token():
             settings.LIVEKIT_API_SECRET
         )
         .with_identity(identity)
-        .with_name("Patient")
+        .with_name("User")
         .with_grants(
             api.VideoGrants(
                 room_join=True,
@@ -33,7 +33,6 @@ async def create_token():
     )
 
     return {
-        "token": token.to_jwt(),
-        "url":settings.LIVEKIT_URL,
-        "room": room_name
+        'server_url': settings.LIVEKIT_URL,
+        'participant_token': token.to_jwt()
     }
